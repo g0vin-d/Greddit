@@ -1,0 +1,25 @@
+{
+    "name": "greddit",
+    "version": "1.0.0",
+    "description": "A Simple Reddit Clone",
+    "main": "app.js",
+    "scripts": {
+        "start": "nodemon server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/g0vin-d/Greddit.git"
+    },
+    "author": "Govind Thakre",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/g0vin-d/Greddit/issues"
+    },
+    "homepage": "https://github.com/g0vin-d/Greddit#readme",
+    "dependencies": {
+        "dotenv": "^10.0.0",
+        "express": "^4.17.2",
+        "mongoose": "^6.1.3",
+        "morgan": "^1.10.0"
+    }
+}
