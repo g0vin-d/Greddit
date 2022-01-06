@@ -15,6 +15,11 @@ const subredditSchema = new moongoose.Schema({
     type: String,
     trim: true,
   },
+  creator: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: [true, 'subreddit must belong to an user'],
+  },
 });
 
 const Subreddit = mongoose.model('Subreddit', subredditSchema);

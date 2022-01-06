@@ -1,29 +1,32 @@
 {
-    "name": "greddit",
-    "version": "1.0.0",
-    "description": "A Simple Reddit Clone",
-    "main": "app.js",
-    "scripts": {
-        "start": "nodemon server.js",
-        "start:prod": "NODE_ENV=production nodemon server.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/g0vin-d/Greddit.git"
-    },
-    "author": "Govind Thakre",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/g0vin-d/Greddit/issues"
-    },
-    "homepage": "https://github.com/g0vin-d/Greddit#readme",
-    "dependencies": {
-        "bcrypt": "^5.0.1",
-        "dotenv": "^10.0.0",
-        "express": "^4.17.2",
-        "jsonwebtoken": "^8.5.1",
-        "mongoose": "^6.1.3",
-        "morgan": "^1.10.0",
-        "validator": "^13.7.0"
-    }
+  "name": "greddit",
+  "version": "1.0.0",
+  "description": "A Simple Reddit Clone",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "start:prod": "NODE_ENV=production nodemon server.js",
+    "watch:css": "sass public/scss/main.scss public/css/style.css -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/g0vin-d/Greddit.git"
+  },
+  "author": "Govind Thakre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/g0vin-d/Greddit/issues"
+  },
+  "homepage": "https://github.com/g0vin-d/Greddit#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.3",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2",
+    "sass": "^1.46.0",
+    "validator": "^13.7.0"
+  }
 }
