@@ -1,0 +1,15 @@
+extends base
+
+block content
+  .main
+    .login-form
+      h2.heading-secondary.ma-bt-lg Log into your account
+      form.form
+        div(class="form__group")
+          label(class="form__label", for="email") Email address
+          input#email(class="form__input", type="email", placeholder="you@example.com", required="required")
+        div(class="form__group ma-bt-md")
+          label(class="form__label", for="password") Password
+          input#password(class="form__input", type="password", placeholder="••••••••", required="required", minlength="8")
+        div(class="form__group")
+          a.btn.btn--orange(href="#") Login

@@ -1,0 +1,27 @@
+extends base
+
+block content
+  .main
+    .subreddit-btn
+      a.btn.btn--post(href="#") Create Subreddit
+    .createPost-form.hidden
+      h2.heading-secondary.ma-bt-lg Create Subreddit
+      form.form
+        div(class="form__group")
+          label(class="form__label", for="title") Title
+          input#title(class="form__input", type="text", placeholder="Subreddit Title....", required="required")
+        div(class="form__group ma-bt-md")
+          label(class="form__label", for="desc") Description
+          textarea#desc(class="form__input", type="textarea", placeholder="Subreddit description", rows="5", cols="5")
+        div(class="form__group")
+          a.btn.btn--orange(href="#") create
+          a.btn.btn--cancel(href="#") cancel
+    .content
+      div(class="content__center")
+        ul(class="subreddit__list")
+          li(class="subreddit__item")
+            a(href="#", class="subreddit__link") r/AskReddit
+          li(class="subreddit__item")
+            a(href="#", class="subreddit__link") r/Anime
+          li(class="subreddit__item")
+            a(href="#", class="subreddit__link") r/Blog
