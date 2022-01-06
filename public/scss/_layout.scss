@@ -1,0 +1,103 @@
+.main {
+  background-color: #f7f7f7;
+  padding: 8rem 6rem;
+  position: relative;
+  flex: 1;
+}
+.main-2 {
+  background-color: #f7f7f7;
+  position: relative;
+  flex: 1;
+}
+.content {
+  // background-color: brown;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(6rem, 1fr) [center-start] repeat(
+      8,
+      [col-start] minmax(min-content, 14rem) [col-end]
+    )
+    [center-end] minmax(6rem, 1fr)
+    [full-end];
+
+  &__left {
+    grid-column: col-start 1 / col-end 5;
+  }
+  &__right {
+    grid-column: col-start 6 / col-end 8;
+  }
+
+  &__center {
+    grid-column: col-start 2 / col-end 7;
+  }
+}
+
+.channel-bar {
+  background-color: #f7f7f7;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // border-bottom: var(--line);
+}
+
+.profile {
+  max-width: 65rem;
+  background-color: white;
+  margin: 2rem auto;
+  border-radius: 5px;
+  box-shadow: var(--light-shadow);
+  padding: 5rem 7rem;
+
+  &__username {
+    margin-bottom: 2rem;
+  }
+  &__post-count {
+    font-size: 1.5rem;
+    color: $color-grey-dark-2;
+    font-weight: 400;
+  }
+}
+
+.heading {
+  font-size: 5rem;
+  margin-right: 5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+  display: inline-block;
+  background-image: linear-gradient(
+    to right,
+    var(--color-secondary),
+    var(--color-primary)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.2);
+  }
+}
+
+.heading-secondary {
+  font-size: 2.25rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  // background-image: linear-gradient(to right, #7dd56f, #28b487);
+  background-image: linear-gradient(
+    to right,
+    var(--color-secondary),
+    var(--color-primary)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 0.1rem;
+  line-height: 1.3;
+  display: inline-block;
+}

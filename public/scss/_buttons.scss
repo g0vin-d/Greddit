@@ -1,0 +1,62 @@
+.btn {
+  &,
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all 0.2s;
+    position: relative;
+
+    // changes for <button>
+    // border: none;
+    cursor: pointer;
+  }
+
+  &:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+  }
+}
+
+.btn--post {
+  width: 90%;
+  font-weight: 700;
+  background-color: orangered;
+  color: white;
+  text-align: center;
+}
+
+.btn--orange {
+  // background-color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 400;
+}
+
+.btn--comment {
+  font-weight: 400;
+  font-size: 1.4rem;
+  text-decoration: none;
+  padding: 1rem;
+  border: 2px solid var(--color-secondary);
+  color: var(--color-secondary);
+}
+
+.btn--cancel {
+  background-color: var(--color-grey-light-3);
+  color: $color-grey-dark-1;
+}

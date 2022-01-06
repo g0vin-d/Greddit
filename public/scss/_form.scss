@@ -1,0 +1,115 @@
+.ma-bt-md {
+  margin-bottom: 3rem !important;
+}
+
+.ma-bt-lg {
+  margin-bottom: 3.5rem !important;
+}
+
+.login-form {
+  max-width: 55rem;
+  background-color: white;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: var(--light-shadow);
+  padding: 5rem 7rem;
+}
+
+.createPost-form {
+  max-width: 75rem;
+  background-color: white;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: var(--light-shadow);
+  padding: 5rem 7rem;
+}
+
+.subreddit-btn {
+  max-width: 75rem;
+  background-color: white;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: var(--light-shadow);
+  padding: 5rem 7rem;
+  margin-bottom: 5rem;
+}
+
+.form {
+  display: block;
+
+  &__group:not(:last-child) {
+    margin-bottom: 2.5rem;
+  }
+  &__label {
+    margin-left: 0.3rem;
+    color: var(--color-grey-dark-2);
+    margin-bottom: 0.75rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    display: block;
+  }
+
+  &__select {
+    overflow: hidden;
+    // appearance: none;
+    font-family: inherit;
+    font-size: 1.5rem;
+    color: inherit;
+    padding: 1.5rem 2rem;
+    border-radius: 5px;
+    background-color: #e8f0fe;
+    width: 90%;
+    display: block;
+    border: none;
+    transition: all 0.3s;
+
+    & option {
+      color: $color-grey-dark-1;
+    }
+
+    &:required:invalid {
+      color: #5a667f;
+    }
+
+    & option[value=''][disabled] {
+      display: none;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: (--dark-shadow);
+    }
+  }
+
+  &__input {
+    font-family: inherit;
+    font-size: 1.5rem;
+    color: inherit;
+    padding: 1.5rem 2rem;
+    border-radius: 3px;
+    background-color: #e8f0fe;
+    width: 90%;
+    display: block;
+    border: none;
+    border-bottom: 3px solid transparent;
+    transition: all 0.4s;
+
+    &:focus {
+      outline: none;
+      box-shadow: (--dark-shadow);
+      border-bottom: 3px solid #008000;
+    }
+
+    &:focus:invalid {
+      border-bottom: 3px solid var(--color-primary);
+    }
+  }
+}
+
+// .select-selected {
+//   background-color: pink;
+// }
+
+.hidden {
+  display: none;
+}
