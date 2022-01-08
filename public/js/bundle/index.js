@@ -520,17 +520,31 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"8KZ4A":[function(require,module,exports) {
 var _login = require("./login");
-const loginForm = document.querySelector('.login-form');
+var _subreddit = require("./subreddit");
 const btnLogin = document.querySelector('.btn__login');
 const btnLogOut = document.querySelector('.btn--logout');
+const btnShowSubForm = document.querySelector('.btn--showSubForm');
+const btnCreateSub = document.querySelector('.btn--createSub');
+const btnCancalCreateSub = document.querySelector('.btn--cancalCreate');
 if (btnLogin) btnLogin.addEventListener('click', (e)=>{
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     _login.login(email, password);
 });
 if (btnLogOut) btnLogOut.addEventListener('click', _login.logout);
+if (btnShowSubForm) btnShowSubForm.addEventListener('click', ()=>{
+    document.querySelector('.createSub-form').classList.remove('hidden');
+});
+if (btnCancalCreateSub) btnCancalCreateSub.addEventListener('click', ()=>{
+    document.querySelector('.createSub-form').classList.add('hidden');
+});
+if (btnCreateSub) btnCreateSub.addEventListener('click', (e)=>{
+    const name = document.getElementById('title').value;
+    const desc = document.getElementById('desc').value;
+    _subreddit.subCreate(name, desc);
+});
 
-},{"./login":"dGE70"}],"dGE70":[function(require,module,exports) {
+},{"./login":"dGE70","./subreddit":"9ZFSJ"}],"dGE70":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "login", ()=>login
@@ -2178,6 +2192,36 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["3KPhx","8KZ4A"], "8KZ4A", "parcelRequire4522")
+},{}],"9ZFSJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "subCreate", ()=>subCreate
+);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _alert = require("./alert");
+const subCreate = async (name, description)=>{
+    console.log(name, description);
+    try {
+        const res = await _axiosDefault.default({
+            method: 'post',
+            url: '/r/create',
+            data: {
+                name,
+                description
+            }
+        });
+        if (res.data.status === 'success') {
+            _alert.showAlert('success', 'Subreddit created.');
+            window.setTimeout(()=>{
+                location.assign('/r/allSubs');
+            }, 2000);
+        }
+    } catch (err) {
+        _alert.showAlert('error', err.response.data.message);
+    }
+};
+
+},{"axios":"1IeuP","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","./alert":"3n3IV"}]},["3KPhx","8KZ4A"], "8KZ4A", "parcelRequire4522")
 
 //# sourceMappingURL=index.js.map

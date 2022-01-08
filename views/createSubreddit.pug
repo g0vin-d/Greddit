@@ -3,8 +3,8 @@ extends base
 block content
   .main
     .subreddit-btn
-      a.btn.btn--post(href="#") Create Subreddit
-    .createPost-form.hidden
+      a.btn.btn--post.btn--showSubForm(href="#") Create Subreddit
+    .createSub-form.hidden
       h2.heading-secondary.ma-bt-lg Create Subreddit
       form.form
         div(class="form__group")
@@ -14,14 +14,12 @@ block content
           label(class="form__label", for="desc") Description
           textarea#desc(class="form__input", type="textarea", placeholder="Subreddit description", rows="5", cols="5")
         div(class="form__group")
-          a.btn.btn--orange(href="#") create
-          a.btn.btn--cancel(href="#") cancel
-    .content
-      div(class="content__center")
-        ul(class="subreddit__list")
-          li(class="subreddit__item")
-            a(href="#", class="subreddit__link") r/AskReddit
-          li(class="subreddit__item")
-            a(href="#", class="subreddit__link") r/Anime
-          li(class="subreddit__item")
-            a(href="#", class="subreddit__link") r/Blog
+          a.btn.btn--orange.btn--createSub(href="#") create
+          a.btn.btn--cancel.btn--cancalCreate(href="#") cancel
+    if subreddits
+        .content
+          div(class="content__center")
+            ul(class="subreddit__list")
+              each sub in subreddits
+                li(class="subreddit__item")
+                  a(href="#", class="subreddit__link")=`r/${sub.name}` 
