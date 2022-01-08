@@ -1,12 +1,18 @@
 
 header.header
   div(class="header__logo-box")
-    img(src="img/logo.png", alt="Greddit logo", class="header__logo")
-    p(class="header__logo-text") Greddit
+    img(src="/img/logo.png", alt="Greddit logo", class="header__logo")
+    p(class="header__logo-text")=title
   ul(class="header__list")
     li(class="header__item")
       a(href="#", class="header__link") Subreddits
-    li(class="header__item")
-      a(href="#", class="header__link") Profile
-    li(class="header__item")
-      a(href="#", class="header__link") Login
+    if user
+      li(class="header__item btn--logout")
+        a(href="#", class="header__link") Logout
+      li(class="header__item")
+        a(href="#", class="header__link")=user.username 
+    else 
+      li(class="header__item btn--login")
+        a(href="#", class="header__link") log in 
+      li(class="header__item")
+        a(href="#", class="header__link") sign up

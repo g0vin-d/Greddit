@@ -1,15 +1,8 @@
 const router = require('express').Router();
-const postController = require('../controller/postController');
 const authController = require('../controller/authController');
+const viewController = require('../controller/viewController');
 
-router.get('/', (req, res) => {
-  res.status(200).render('homepage', {
-    title: 'Greddit',
-  });
-});
-
-router.get('/posts', postController.getAllPost);
-router.post('/post', authController.protect, postController.createPost);
-router.patch('/post/:id', authController.protect, postController.updatePost);
+router.get('/login', viewController.login);
+router.get('/', authController.isLoggedIn, viewController.overview);
 
 module.exports = router;

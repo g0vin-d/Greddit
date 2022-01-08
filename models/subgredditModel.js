@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const subredditSchema = new moongoose.Schema({
+const subredditSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'A subreddit must have a name'],

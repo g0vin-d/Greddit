@@ -19,6 +19,11 @@ const postSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  subreddit: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Subreddit',
+    required: [true, 'post must belong to subreddit'],
+  },
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',

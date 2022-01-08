@@ -1,8 +1,11 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 const viewRoutes = require('./routes/viewRoutes');
+const postRoutes = require('./routes/postRoutes');
 const userRoutes = require('./routes/userRoutes');
+const subredditRoutes = require('./routes/subredditRoutes');
 const globalErrorHandler = require('./controller/errorController');
 
 const app = express();
@@ -14,17 +17,21 @@ app.set('views', path.join(__dirname, 'views'));
 if (process.env.NODE_ENV == 'development') app.use(morgan('dev'));
 
 //Middlewars
+//body parser, cookieparser
 app.use(express.json());
+app.use(cookieParser());
 
 //serving static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 // app.get('/', (req, res, next) => {
 //   res.status(200).json(DB);
 // });
 
 app.use('/', viewRoutes);
-app.use('/users', userRoutes);
+app.use('/post', postRoutes);
+app.use('/r', subredditRoutes);
+app.use('/user', userRoutes);
 
 // Global error handling middleware
 app.use(globalErrorHandler);
