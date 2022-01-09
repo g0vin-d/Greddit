@@ -9,6 +9,7 @@ router.post(
   subredditController.createSubreddit
 );
 
-router.get('/allSubs', viewController.allSubs);
+//views
+router.get('/allSubs', authController.isLoggedIn, viewController.allSubs);
 
 module.exports = router;

@@ -17,6 +17,15 @@ exports.allSubs = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.createPost = catchAsync(async (req, res, next) => {
+  const subreddits = await Subreddit.find();
+
+  res.status(200).render('createPost', {
+    title: 'Greddit | Create Post',
+    subreddits,
+  });
+});
+
 exports.login = (req, res, next) => {
   res.status(200).render('login', {
     title: 'Greddit',

@@ -193,6 +193,7 @@ body {
   height: 4rem;
 }
 .header__logo-text {
+  text-decoration: none;
   font-size: 1.7rem;
   font-weight: 400;
   color: var(--color-grey-light-1);

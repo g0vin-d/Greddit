@@ -9,10 +9,8 @@ block content
           label(class="form__label", for="subreddit") Select Subreddit
           select#subreddits(name="subreddits", class="form__select")
             option(value='', disabled, selected) Select Subreddit
-            option(value="askreddit") AskReddit
-            option(value="dankmemes") Dankmemes
-            option(value="blog") Blog
-            option(value="anime") Anime
+            each sub in subreddits
+              option(value=`${sub.name}-${sub._id}`)=sub.name
         div(class="form__group")
           label(class="form__label", for="title") Title
           input#title(class="form__input", type="text", placeholder="Post Title....", required="required")
@@ -20,5 +18,5 @@ block content
           label(class="form__label", for="desc") Description
           textarea#desc(class="form__input", type="textarea", placeholder="Post description", rows="10", cols="5")
         div(class="form__group")
-          a.btn.btn--orange(href="#") post
-          a.btn.btn--cancel(href="#") cancel
+          a.btn.btn--orange.btn--createPost(href="#") post
+          a.btn.btn--cancel.btn--cancelCreatePost(href="#") cancel

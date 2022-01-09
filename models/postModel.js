@@ -5,14 +5,13 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A post must have title'],
     trim: true,
-    maxlength: [40, 'A title must have characters less or equal than 40'],
     minlength: [10, 'A title must have characters more or equal than 10'],
   },
   message: {
     type: String,
     trim: true,
-    maxlength: [40, 'A title must have characters less or equal than 40'],
     required: true,
+    maxlength: [100, 'A message must have characters less or equal than 100'],
   },
   image: String,
   postedAt: {

@@ -521,17 +521,22 @@ function hmrAcceptRun(bundle, id) {
 },{}],"8KZ4A":[function(require,module,exports) {
 var _login = require("./login");
 var _subreddit = require("./subreddit");
+var _post = require("./post");
 const btnLogin = document.querySelector('.btn__login');
 const btnLogOut = document.querySelector('.btn--logout');
 const btnShowSubForm = document.querySelector('.btn--showSubForm');
 const btnCreateSub = document.querySelector('.btn--createSub');
 const btnCancalCreateSub = document.querySelector('.btn--cancalCreate');
+const btnCreatePost = document.querySelector('.btn--createPost');
+const btnCancelCreatePost = document.querySelector('.btn--cancelCreatePost');
+// Login & Logout
 if (btnLogin) btnLogin.addEventListener('click', (e)=>{
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     _login.login(email, password);
 });
 if (btnLogOut) btnLogOut.addEventListener('click', _login.logout);
+// Create Subreddit
 if (btnShowSubForm) btnShowSubForm.addEventListener('click', ()=>{
     document.querySelector('.createSub-form').classList.remove('hidden');
 });
@@ -543,8 +548,15 @@ if (btnCreateSub) btnCreateSub.addEventListener('click', (e)=>{
     const desc = document.getElementById('desc').value;
     _subreddit.subCreate(name, desc);
 });
+// Create Post
+if (btnCreatePost) btnCreatePost.addEventListener('click', (e)=>{
+    const selectOption = document.getElementById('subreddits').value;
+    const title = document.getElementById('title').value;
+    const desc = document.getElementById('desc').value;
+    _post.createPost(selectOption, title, desc);
+});
 
-},{"./login":"dGE70","./subreddit":"9ZFSJ"}],"dGE70":[function(require,module,exports) {
+},{"./login":"dGE70","./subreddit":"9ZFSJ","./post":"AfkBj"}],"dGE70":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "login", ()=>login
@@ -2222,6 +2234,38 @@ const subCreate = async (name, description)=>{
     }
 };
 
-},{"axios":"1IeuP","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","./alert":"3n3IV"}]},["3KPhx","8KZ4A"], "8KZ4A", "parcelRequire4522")
+},{"axios":"1IeuP","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","./alert":"3n3IV"}],"AfkBj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "createPost", ()=>createPost
+);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _alert = require("./alert");
+const createPost = async (selectOption, title, message)=>{
+    try {
+        subreddit = selectOption.split('-')[1];
+        console.log(subreddit);
+        const res = await _axiosDefault.default({
+            method: 'post',
+            url: '/post',
+            data: {
+                subreddit,
+                title,
+                message
+            }
+        });
+        if (res.data.status === 'success') {
+            _alert.showAlert('success', 'post created.');
+            window.setTimeout(()=>{
+                location.assign('/');
+            }, 1000);
+        }
+    } catch (err) {
+        _alert.showAlert('error', err.response.data.message);
+    }
+};
+
+},{"axios":"1IeuP","./alert":"3n3IV","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}]},["3KPhx","8KZ4A"], "8KZ4A", "parcelRequire4522")
 
 //# sourceMappingURL=index.js.map
