@@ -6,6 +6,7 @@ const viewRoutes = require('./routes/viewRoutes');
 const postRoutes = require('./routes/postRoutes');
 const userRoutes = require('./routes/userRoutes');
 const subredditRoutes = require('./routes/subredditRoutes');
+const commentRoutes = require('./routes/commentRoutes');
 const globalErrorHandler = require('./controller/errorController');
 
 const app = express();
@@ -29,9 +30,10 @@ app.use(express.static(path.join(__dirname, '/public')));
 // });
 
 app.use('/', viewRoutes);
-app.use('/post', postRoutes);
-app.use('/r', subredditRoutes);
-app.use('/user', userRoutes);
+app.use('/api/post', postRoutes);
+app.use('/api/r', subredditRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/comment', commentRoutes);
 
 // Global error handling middleware
 app.use(globalErrorHandler);

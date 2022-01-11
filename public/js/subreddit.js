@@ -6,7 +6,7 @@ export const subCreate = async (name, description) => {
   try {
     const res = await axios({
       method: 'post',
-      url: '/r/create',
+      url: '/api/r/create',
       data: {
         name,
         description,

@@ -13,7 +13,15 @@ exports.createPost = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllPost = catchAsync(async (req, res, next) => {
-  const posts = await Post.find();
+  const posts = await Post.find()
+    .populate({
+      path: 'subreddit',
+      select: 'name',
+    })
+    .populate({
+      path: 'user',
+      select: 'username',
+    });
 
   res.status(200).json({
     status: 'success',

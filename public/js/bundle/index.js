@@ -570,7 +570,7 @@ const login = async (email, password)=>{
     try {
         const res = await _axiosDefault.default({
             method: 'post',
-            url: '/user/login',
+            url: '/api/user/login',
             data: {
                 email,
                 password
@@ -589,7 +589,7 @@ const login = async (email, password)=>{
 const logout = async ()=>{
     const res = await _axiosDefault.default({
         method: 'GET',
-        url: '/user/logout'
+        url: '/api/user/logout'
     });
     if (res.data.status === 'success') {
         _alert.showAlert('success', 'Looged out');
@@ -2217,7 +2217,7 @@ const subCreate = async (name, description)=>{
     try {
         const res = await _axiosDefault.default({
             method: 'post',
-            url: '/r/create',
+            url: '/api/r/create',
             data: {
                 name,
                 description
@@ -2234,7 +2234,7 @@ const subCreate = async (name, description)=>{
     }
 };
 
-},{"axios":"1IeuP","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","./alert":"3n3IV"}],"AfkBj":[function(require,module,exports) {
+},{"axios":"1IeuP","./alert":"3n3IV","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"AfkBj":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "createPost", ()=>createPost
@@ -2248,7 +2248,7 @@ const createPost = async (selectOption, title, message)=>{
         console.log(subreddit);
         const res = await _axiosDefault.default({
             method: 'post',
-            url: '/post',
+            url: '/api/post',
             data: {
                 subreddit,
                 title,

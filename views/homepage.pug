@@ -4,34 +4,29 @@ block content
   .main-2
     .content
       div(class="content__left")
-        .post
-          div(class="post__header")
-            div(class="post__channel")
-              a(href="#", class="post__channel-link") r/Askreddit
-            span .
-            span Posted by
-            div(class="post__author")
-              a(href="#", class="post__author-link") u/mubix
-            span(class="post__time") 2 days ago
-          div(class="post__title")
-            a(href="#", class="post__title-link")
-              | What is the creepiest thing that has ever happened while you
-              | were home alone?
-          div(class="post__desc")
-            p(class="post__desc-text")
-              | Once was watching arachnophobia as a 13 year old on Halloween.
-              | Went to go to bed, got a little nervous because of the movie,
-              | decided to just shake out my bedspread. Found a solid 3 inch
-              | wolf spider sitting like an Andes mint on my pillow. Slept in
-              | the bathtub that night. Idk why that felt safe but it did
-          div(class="post__bar")
-            div(class="post__vote-section")
-              span &#8593;
-              p(class="post__vote-text") Vote
-              span &#8595;
-            div(class="post__comments")
-              a(href="#", class="post__comments-link") 20 
-                span comments
+        if posts
+          each post in posts
+            .post
+              div(class="post__header")
+                div(class="post__channel")
+                  a(href="#", class="post__channel-link")=`r/${post.subreddit.name}`
+                span .
+                span Posted by
+                div(class="post__author")
+                  a(href="#", class="post__author-link")=`u/${post.user.username}`
+                span(class="post__time")=`${new Date(post.postedAt)}`
+              div(class="post__title")
+                a(href=`post/${post._id}`, class="post__title-link")=post.title
+              div(class="post__desc")
+                p(class="post__desc-text")=post.message
+              div(class="post__bar")
+                div(class="post__vote-section")
+                  span &#8593;
+                  p(class="post__vote-text") Vote
+                  span &#8595;
+                div(class="post__comments")
+                  a(href="#", class="post__comments-link")=`${post.comments ? post.comments.length : 0} `
+                    span comments
       div(class="content__right")
         .sidebar
           p(class="sidebar__title") Top Subreddits

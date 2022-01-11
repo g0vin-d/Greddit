@@ -10,6 +10,5 @@ router.post(
 );
 
 //views
-router.get('/allSubs', authController.isLoggedIn, viewController.allSubs);
 
 module.exports = router;

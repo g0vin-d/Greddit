@@ -8,7 +8,7 @@ export const createPost = async (selectOption, title, message) => {
 
     const res = await axios({
       method: 'post',
-      url: '/post',
+      url: '/api/post',
       data: {
         subreddit,
         title,

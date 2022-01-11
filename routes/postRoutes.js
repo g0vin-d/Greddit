@@ -9,11 +9,5 @@ router.post('/', authController.protect, postController.createPost);
 router.patch('/:id', authController.protect, postController.updatePost);
 
 //views
-router.get(
-  '/create',
-  authController.isLoggedIn,
-  authController.protect,
-  viewController.createPost
-);
 
 module.exports = router;
