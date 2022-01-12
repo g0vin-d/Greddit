@@ -26,3 +26,18 @@ export const createPost = async (selectOption, title, message) => {
     showAlert('error', err.response.data.message);
   }
 };
+
+export const setVote = async (id, vote) => {
+  try {
+    const res = await axios({
+      method: 'patch',
+      url: `/api/post/${vote}/${id}`,
+    });
+
+    if (res.data.status == 'success') {
+      return res.data.post.votes;
+    }
+  } catch (err) {
+    showAlert('error', err.response.data.message);
+  }
+};

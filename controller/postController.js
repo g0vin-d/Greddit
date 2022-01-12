@@ -45,3 +45,41 @@ exports.updatePost = catchAsync(async (req, res, next) => {
     post,
   });
 });
+
+exports.upvotePost = catchAsync(async (req, res, next) => {
+  const post = await Post.findById(req.params.id);
+  const user_id = req.user._id;
+  if (!post.upvotes.includes(user_id)) {
+    post.upvotes.push(user_id);
+  }
+
+  if (post.downvotes.includes(user_id)) {
+    post.downvotes.pull(user_id);
+  }
+
+  await post.save();
+
+  res.status(200).json({
+    status: 'success',
+    post,
+  });
+});
+
+exports.downvotePost = catchAsync(async (req, res, next) => {
+  const post = await Post.findById(req.params.id);
+  const user_id = req.user._id;
+  if (!post.downvotes.includes(user_id)) {
+    post.downvotes.push(user_id);
+  }
+
+  if (post.upvotes.includes(user_id)) {
+    post.upvotes.pull(user_id);
+  }
+
+  await post.save();
+
+  res.status(200).json({
+    status: 'success',
+    post,
+  });
+});

@@ -74,11 +74,17 @@
   &__vote-section {
     display: flex;
     justify-content: center;
+    align-items: center;
     font-size: 1.5rem;
 
-    span {
+    i {
       padding: 0 2rem;
     }
+  }
+
+  &__comments {
+    align-self: center;
+    justify-self: center;
   }
 
   &__comments-link {
@@ -90,6 +96,7 @@
       font-weight: 700;
     }
     span {
+      margin-left: 0.3rem;
       font-weight: 400;
     }
   }
@@ -180,4 +187,8 @@
       font-weight: 700;
     }
   }
+}
+
+.red {
+  color: var(--color-primary);
 }

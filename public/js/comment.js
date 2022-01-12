@@ -40,13 +40,11 @@ export const createComment = async ({ post, comment }) => {
 
 export const deleteComment = async (id) => {
   try {
-    console.log(id);
     const res = await axios({
       method: 'delete',
       url: `/api/comment/${id}`,
     });
 
-    console.log(res);
     if (res.status === 204) {
       showAlert('success', 'comment deleted.', 2);
     }

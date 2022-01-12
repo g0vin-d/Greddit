@@ -208,6 +208,13 @@ body {
 }
 .header__item {
   margin: 1rem;
+  align-self: center;
+  justify-self: center;
+}
+.header__item i {
+  font-size: 2.2rem;
+  padding-right: 0.7rem;
+  color: white;
 }
 .header__item:last-child {
   margin-right: 4rem;
@@ -377,10 +384,15 @@ body {
 .post__vote-section {
   display: flex;
   justify-content: center;
+  align-items: center;
   font-size: 1.5rem;
 }
-.post__vote-section span {
+.post__vote-section i {
   padding: 0 2rem;
+}
+.post__comments {
+  align-self: center;
+  justify-self: center;
 }
 .post__comments-link:link, .post__comments-link:visited {
   text-decoration: none;
@@ -389,6 +401,7 @@ body {
   font-weight: 700;
 }
 .post__comments-link span {
+  margin-left: 0.3rem;
   font-weight: 400;
 }
 
@@ -458,6 +471,10 @@ body {
   text-decoration: none;
   color: var(--color-secondary);
   font-weight: 700;
+}
+
+.red {
+  color: var(--color-primary);
 }
 
 .sidebar {

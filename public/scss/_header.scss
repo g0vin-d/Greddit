@@ -35,6 +35,14 @@
 
   &__item {
     margin: 1rem;
+    align-self: center;
+    justify-self: center;
+
+    i {
+      font-size: 2.2rem;
+      padding-right: 0.7rem;
+      color: white;
+    }
 
     &:last-child {
       margin-right: 4rem;

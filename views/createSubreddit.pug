@@ -2,8 +2,9 @@ extends base
 
 block content
   .main
-    .subreddit-btn
-      a.btn.btn--post.btn--showSubForm(href="#") Create Subreddit
+    if user
+      .subreddit-btn
+        a.btn.btn--post.btn--showSubForm(href="#") Create Subreddit
     .createSub-form.hidden
       h2.heading-secondary.ma-bt-lg Create Subreddit
       form.form

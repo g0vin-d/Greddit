@@ -523,6 +523,7 @@ var _login = require("./login");
 var _subreddit = require("./subreddit");
 var _post = require("./post");
 var _comment = require("./comment");
+const main2 = document.querySelector('.main-2');
 const btnLogin = document.querySelector('.btn__login');
 const btnLogOut = document.querySelector('.btn--logout');
 const btnShowSubForm = document.querySelector('.btn--showSubForm');
@@ -531,22 +532,25 @@ const btnCancalCreateSub = document.querySelector('.btn--cancalCreate');
 const btnCreatePost = document.querySelector('.btn--createPost');
 const btnCancelCreatePost = document.querySelector('.btn--cancelCreatePost');
 const btnAddComment = document.querySelector('.btn--postComment');
-// const btnDeleteComment = document.querySelector('.btn--deleteComment');
 const commentSection = document.querySelector('.comments');
-// Login & Logout
+const voteSection = document.querySelector('.post__vote-section');
+// Login
 if (btnLogin) btnLogin.addEventListener('click', (e)=>{
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     _login.login(email, password);
 });
+// Logout
 if (btnLogOut) btnLogOut.addEventListener('click', _login.logout);
-// Create Subreddit
+// Show Create Subreddit form
 if (btnShowSubForm) btnShowSubForm.addEventListener('click', ()=>{
     document.querySelector('.createSub-form').classList.remove('hidden');
 });
+// Hide create Subreddit form
 if (btnCancalCreateSub) btnCancalCreateSub.addEventListener('click', ()=>{
     document.querySelector('.createSub-form').classList.add('hidden');
 });
+// Create Subreddit
 if (btnCreateSub) btnCreateSub.addEventListener('click', (e)=>{
     const name = document.getElementById('title').value;
     const desc = document.getElementById('desc').value;
@@ -559,19 +563,47 @@ if (btnCreatePost) btnCreatePost.addEventListener('click', (e)=>{
     const desc = document.getElementById('desc').value;
     _post.createPost(selectOption, title, desc);
 });
-if (btnAddComment) btnAddComment.addEventListener('click', (e)=>{
+// Add comment
+if (btnAddComment) btnAddComment.addEventListener('click', async (e)=>{
     const post = window.location.pathname.split('/')[2];
     const comment = document.getElementById('desc').value;
-    _comment.createComment({
+    await _comment.createComment({
         post,
         comment
     });
+    const noOfComments = document.querySelector('.post__comments-link');
+    const newCount = +noOfComments.innerHTML.split(' ')[0] + 1;
+    noOfComments.innerHTML = `${newCount} <span>Comments</span>`;
 });
+// Delete Comment
 if (commentSection) commentSection.addEventListener('click', async (e)=>{
     if (e.target.classList.contains('btn--deleteComment')) {
         const id = e.target.closest('.comment').dataset.commentid;
         await _comment.deleteComment(id);
         commentSection.removeChild(e.target.closest('.comment'));
+        const noOfComments = document.querySelector('.post__comments-link');
+        const newCount = +noOfComments.innerHTML.split(' ')[0] - 1;
+        noOfComments.innerHTML = `${newCount} <span>Comments</span>`;
+    }
+});
+// Upvote & Downvote
+if (main2) main2.addEventListener('click', async (e)=>{
+    if (e.target.classList.contains('btn--upvote')) {
+        const voteSection1 = e.target.closest('.post__vote-section');
+        post = voteSection1.dataset.postid;
+        // set vote
+        const vote = await _post.setVote(post, 'upvote');
+        voteSection1.querySelector('.post__vote-text').textContent = vote;
+        voteSection1.querySelector('.fa-arrow-up').classList.add('red');
+        voteSection1.querySelector('.fa-arrow-down').classList.remove('red');
+    } else if (e.target.classList.contains('btn--downvote')) {
+        const voteSection2 = e.target.closest('.post__vote-section');
+        post = voteSection2.dataset.postid;
+        // set vote
+        const vote = await _post.setVote(post, 'downvote');
+        voteSection2.querySelector('.post__vote-text').textContent = vote;
+        voteSection2.querySelector('.fa-arrow-up').classList.remove('red');
+        voteSection2.querySelector('.fa-arrow-down').classList.add('red');
     }
 });
 
@@ -2258,6 +2290,8 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "createPost", ()=>createPost
 );
+parcelHelpers.export(exports, "setVote", ()=>setVote
+);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _alert = require("./alert");
@@ -2280,6 +2314,17 @@ const createPost = async (selectOption, title, message)=>{
                 location.assign('/');
             }, 1000);
         }
+    } catch (err) {
+        _alert.showAlert('error', err.response.data.message);
+    }
+};
+const setVote = async (id, vote)=>{
+    try {
+        const res = await _axiosDefault.default({
+            method: 'patch',
+            url: `/api/post/${vote}/${id}`
+        });
+        if (res.data.status == 'success') return res.data.post.votes;
     } catch (err) {
         _alert.showAlert('error', err.response.data.message);
     }
@@ -2329,12 +2374,10 @@ const createComment = async ({ post , comment  })=>{
 };
 const deleteComment = async (id)=>{
     try {
-        console.log(id);
         const res = await _axiosDefault.default({
             method: 'delete',
             url: `/api/comment/${id}`
         });
-        console.log(res);
         if (res.status === 204) _alert.showAlert('success', 'comment deleted.', 2);
     } catch (err) {
         _alert.showAlert('error', err.response.data.message);

@@ -7,26 +7,7 @@ block content
         if posts
           each post in posts
             .post
-              div(class="post__header")
-                div(class="post__channel")
-                  a(href="#", class="post__channel-link")=`r/${post.subreddit.name}`
-                span .
-                span Posted by
-                div(class="post__author")
-                  a(href="#", class="post__author-link")=`u/${post.user.username}`
-                span(class="post__time")=`${new Date(post.postedAt)}`
-              div(class="post__title")
-                a(href=`post/${post._id}`, class="post__title-link")=post.title
-              div(class="post__desc")
-                p(class="post__desc-text")=post.message
-              div(class="post__bar")
-                div(class="post__vote-section")
-                  span &#8593;
-                  p(class="post__vote-text") Vote
-                  span &#8595;
-                div(class="post__comments")
-                  a(href="#", class="post__comments-link")=`${post.comments ? post.comments.length : 0} `
-                    span comments
+              include _post
       div(class="content__right")
         .sidebar
           p(class="sidebar__title") Top Subreddits
@@ -46,5 +27,6 @@ block content
             li(class="sidebar__item")
               a(href="#", class="sidebar__link") r/AskReddit 
                 span &#8594;
-          div(class="button__submit")
-            a.btn.btn--post(href="#") Create Post
+          if user
+            div(class="button__submit")
+              a.btn.btn--post(href="/post/create") Create Post

@@ -3,26 +3,7 @@ extends base
 block content
   .main-2
     .post-details
-      div(class="post__header")
-        div(class="post__channel")
-          a(href="#", class="post__channel-link")=`r/${post.subreddit.name}`
-        span .
-        span Posted by
-        div(class="post__author")
-          a(href="#", class="post__author-link")=`u/${post.user.username}`
-        span(class="post__time") 2 days ago
-      div(class="post__title")
-        a(href="#", class="post__title-link")=post.title
-      div(class="post__desc")
-        p(class="post__desc-text")=post.message
-      div(class="post__bar")
-        div(class="post__vote-section")
-          span &#8593;
-          p(class="post__vote-text") Vote
-          span &#8595;
-        div(class="post__comments")
-          a(href="#", class="post__comments-link")=`${post.comments ? post.comments.length : 0} `
-            span comments
+      include _post
     div(class="comment__section")
       if user
         div(class="form__group ma-bt-md")

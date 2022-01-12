@@ -11,7 +11,6 @@ const postSchema = new mongoose.Schema(
     message: {
       type: String,
       trim: true,
-      required: true,
       maxlength: [100, 'A message must have characters less or equal than 100'],
     },
     image: String,
@@ -29,6 +28,18 @@ const postSchema = new mongoose.Schema(
       ref: 'User',
       required: [true, 'post must belong to an user'],
     },
+    upvotes: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      },
+    ],
+    downvotes: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   {
     toJSON: { virtuals: true },
@@ -41,6 +52,10 @@ postSchema.virtual('comments', {
   foreignField: 'post',
   localField: '_id',
   options: { sort: { commentedAt: -1 } },
+});
+
+postSchema.virtual('votes').get(function (next) {
+  return this.upvotes.length - this.downvotes.length;
 });
 
 postSchema.pre(/^find/, function (next) {
