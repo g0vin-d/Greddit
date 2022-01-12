@@ -24,16 +24,20 @@ block content
           a(href="#", class="post__comments-link")=`${post.comments ? post.comments.length : 0} `
             span comments
     div(class="comment__section")
-      div(class="form__group ma-bt-md")
-        // <label class="form__label" for="desc">comment</label>
-        textarea#desc(class="form__input", type="textarea", placeholder="comment.....", rows="3", cols="3")
-      div(class="form__group")
-        a.btn.btn--orange(href="#") comment
+      if user
+        div(class="form__group ma-bt-md")
+          // <label class="form__label" for="desc">comment</label>
+          textarea#desc(class="form__input", type="textarea", placeholder="comment.....", rows="3", cols="3")
+        div(class="form__group")
+          a.btn.btn--orange.btn--postComment(href="#/") comment
+      h1(class="" style="margin-bottom: 2rem") Comments:
       if post.comments
-        each com in post.comments
-          .comments
-            .comment
+        .comments
+          each com in post.comments
+            .comment(data-commentId=com._id)
               div(class="comment__box")
                 p(class="comment__author")=`u/${com.commenter.username}`
                 p(class="comment__message")=com.comment
-              a.btn.btn--comment(href="#") Delete
+              if user 
+                if user.username == com.commenter.username
+                  a.btn.btn--comment.btn--deleteComment(href="#/") Delete

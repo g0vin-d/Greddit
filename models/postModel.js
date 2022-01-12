@@ -40,6 +40,7 @@ postSchema.virtual('comments', {
   ref: 'Comment',
   foreignField: 'post',
   localField: '_id',
+  options: { sort: { commentedAt: -1 } },
 });
 
 postSchema.pre(/^find/, function (next) {

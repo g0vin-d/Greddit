@@ -18,6 +18,6 @@ router.get(
   authController.protect,
   viewController.createPost
 );
-router.get('/post/:id', viewController.postDetail);
+router.get('/post/:id', authController.isLoggedIn, viewController.postDetail);
 
 module.exports = router;

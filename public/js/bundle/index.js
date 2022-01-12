@@ -522,6 +522,7 @@ function hmrAcceptRun(bundle, id) {
 var _login = require("./login");
 var _subreddit = require("./subreddit");
 var _post = require("./post");
+var _comment = require("./comment");
 const btnLogin = document.querySelector('.btn__login');
 const btnLogOut = document.querySelector('.btn--logout');
 const btnShowSubForm = document.querySelector('.btn--showSubForm');
@@ -529,6 +530,9 @@ const btnCreateSub = document.querySelector('.btn--createSub');
 const btnCancalCreateSub = document.querySelector('.btn--cancalCreate');
 const btnCreatePost = document.querySelector('.btn--createPost');
 const btnCancelCreatePost = document.querySelector('.btn--cancelCreatePost');
+const btnAddComment = document.querySelector('.btn--postComment');
+// const btnDeleteComment = document.querySelector('.btn--deleteComment');
+const commentSection = document.querySelector('.comments');
 // Login & Logout
 if (btnLogin) btnLogin.addEventListener('click', (e)=>{
     const email = document.getElementById('email').value;
@@ -555,8 +559,23 @@ if (btnCreatePost) btnCreatePost.addEventListener('click', (e)=>{
     const desc = document.getElementById('desc').value;
     _post.createPost(selectOption, title, desc);
 });
+if (btnAddComment) btnAddComment.addEventListener('click', (e)=>{
+    const post = window.location.pathname.split('/')[2];
+    const comment = document.getElementById('desc').value;
+    _comment.createComment({
+        post,
+        comment
+    });
+});
+if (commentSection) commentSection.addEventListener('click', async (e)=>{
+    if (e.target.classList.contains('btn--deleteComment')) {
+        const id = e.target.closest('.comment').dataset.commentid;
+        await _comment.deleteComment(id);
+        commentSection.removeChild(e.target.closest('.comment'));
+    }
+});
 
-},{"./login":"dGE70","./subreddit":"9ZFSJ","./post":"AfkBj"}],"dGE70":[function(require,module,exports) {
+},{"./login":"dGE70","./subreddit":"9ZFSJ","./post":"AfkBj","./comment":"he4Y5"}],"dGE70":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "login", ()=>login
@@ -594,7 +613,7 @@ const logout = async ()=>{
     if (res.data.status === 'success') {
         _alert.showAlert('success', 'Looged out');
         window.setTimeout(()=>{
-            location.assign('/');
+            location.assign('/login');
         }, 2000);
     }
 };
@@ -2261,6 +2280,62 @@ const createPost = async (selectOption, title, message)=>{
                 location.assign('/');
             }, 1000);
         }
+    } catch (err) {
+        _alert.showAlert('error', err.response.data.message);
+    }
+};
+
+},{"axios":"1IeuP","./alert":"3n3IV","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"he4Y5":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "createComment", ()=>createComment
+);
+parcelHelpers.export(exports, "deleteComment", ()=>deleteComment
+);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _alert = require("./alert");
+const createComment = async ({ post , comment  })=>{
+    try {
+        let res = await _axiosDefault.default({
+            method: 'post',
+            url: '/api/comment',
+            data: {
+                post,
+                comment
+            }
+        });
+        res = await _axiosDefault.default({
+            method: 'get',
+            url: `/api/comment/${res.data.data.newCom._id}`
+        });
+        if (res.data.status === 'success') {
+            _alert.showAlert('success', 'comment created.');
+            const com = res.data.data.comment;
+            const markup = `
+          <div class="comment" data-commentId=${com._id}>
+            <div class="comment__box">
+              <p class="comment__author">u/${com.commenter.username}</p>
+              <p class="comment__message">${com.comment}</p>
+            </div>
+            <a href="#/" class="btn btn--comment btn--deleteComment">Delete</a>
+          </div>
+      `;
+            document.querySelector('.comments').insertAdjacentHTML('afterbegin', markup);
+        }
+    } catch (err) {
+        _alert.showAlert('error', err.response.data.message);
+    }
+};
+const deleteComment = async (id)=>{
+    try {
+        console.log(id);
+        const res = await _axiosDefault.default({
+            method: 'delete',
+            url: `/api/comment/${id}`
+        });
+        console.log(res);
+        if (res.status === 204) _alert.showAlert('success', 'comment deleted.', 2);
     } catch (err) {
         _alert.showAlert('error', err.response.data.message);
     }
