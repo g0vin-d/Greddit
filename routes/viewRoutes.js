@@ -7,6 +7,12 @@ router.get('/login', viewController.login);
 
 // overview
 router.get('/', authController.isLoggedIn, viewController.overview);
+router.get(
+  '/profile',
+  authController.isLoggedIn,
+  authController.protect,
+  viewController.profile
+);
 
 // subs
 router.get('/r/allSubs', authController.isLoggedIn, viewController.allSubs);

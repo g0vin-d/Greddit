@@ -12,7 +12,7 @@ header.header
         a(href="#", class="header__link") Logout
       li(class="header__item")
         i(class="fas fa-user-circle")
-        a(href="#", class="header__link")=user.username 
+        a(href="/profile", class="header__link")=user.username 
     else 
       li(class="header__item btn--login")
         i(class="fas fa-sign-in-alt")

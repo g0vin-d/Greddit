@@ -3,9 +3,10 @@ extends base
 block content
   .main-2
     section.profile
-      div(class="profile__details")
-        p(class="profile__username heading-secondary") mubix
-        p(class="profile__post-count") Posts: 3
+      if user
+        div(class="profile__details")
+          p(class="profile__username heading-secondary")=user.username
+          p(class="profile__post-count")=`Posts: ${posts ? posts.length : 0}`
     .content
       div(class="content__center")
         if posts

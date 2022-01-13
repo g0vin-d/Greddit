@@ -1,5 +1,5 @@
-const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const catchAsync = require('../utils/catchAsync');
 const Subreddit = require('../models/subgredditModel');
 const Post = require('../models/postModel');
 const User = require('../models/userModel');
@@ -9,6 +9,15 @@ exports.overview = catchAsync(async (req, res, next) => {
 
   res.status(200).render('homepage', {
     title: 'Greddit | homepage',
+    posts,
+  });
+});
+
+exports.profile = catchAsync(async (req, res, next) => {
+  const posts = await Post.find({ user: req.user._id });
+  console.log(posts);
+  res.status(200).render('profile', {
+    title: 'Greddit | profile',
     posts,
   });
 });
