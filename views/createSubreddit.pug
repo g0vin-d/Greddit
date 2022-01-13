@@ -23,4 +23,4 @@ block content
             ul(class="subreddit__list")
               each sub in subreddits
                 li(class="subreddit__item")
-                  a(href="#", class="subreddit__link")=`r/${sub.name}` 
+                  a(href=`/r/${sub.name}`, class="subreddit__link")=`r/${sub.name}` 

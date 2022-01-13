@@ -10,6 +10,7 @@ router.get('/', authController.isLoggedIn, viewController.overview);
 
 // subs
 router.get('/r/allSubs', authController.isLoggedIn, viewController.allSubs);
+router.get('/r/:name', authController.isLoggedIn, viewController.getSubreddit);
 
 // posts
 router.get(

@@ -9,7 +9,7 @@ block content
           label(class="form__label", for="subreddit") Select Subreddit
           select#subreddits(name="subreddits", class="form__select")
             option(value='', disabled, selected) Select Subreddit
-            each sub in subreddits
+            each sub in user.subs_joined
               option(value=`${sub.name}-${sub._id}`)=sub.name
         div(class="form__group")
           label(class="form__label", for="title") Title

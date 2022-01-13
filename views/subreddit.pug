@@ -3,23 +3,28 @@ extends base
 block content
   .main-2
     section.channel-bar
-      h1.heading Ask Reddit
-      a.btn.btn--orange(href="#") Join
+      h1.heading(data-channelid=`${subreddit._id}`)=subreddit.name
+      if user
+        if user.subs_joined.includes(subreddit._id)
+          a.btn.btn--orange.btn--subLeave(href="#") Leave
+        else 
+          a.btn.btn--orange.btn--subJoin(href="#") Join
     .content
       div(class="content__left")
-        .post
-          include _post
+        if posts
+          each post in posts
+            .post
+              include _post
       div(class="content__right")
         .sidebar
           p(class="sidebar__title") About Community
           div(class="sidebar__channel")
             // <p class="sidebar__channel-title">r/Askreddit</p>
-            p(class="sidebar__channel-desc")
-              | r/AskReddit is the place to ask and answer thought-provoking
-              | questions.
-            p(class="sidebar__channel-member-count")
-              | 22
-              span members
-            p(class="sidebar__channel-createdAt") Created Jan 25, 2008
-          div(class="button__submit")
-            a.btn.btn--post(href="#") Create Post
+            p(class="sidebar__channel-desc")=subreddit.description
+            p(class="sidebar__channel-member-count")=`${users.length} `
+              span members 
+            if subreddit.cratedAt
+              p(class="sidebar__channel-createdAt")=subreddit.cratedAt
+          if user
+            div(class="button__submit")
+              a.btn.btn--post(href="/post/create") Create Post

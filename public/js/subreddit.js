@@ -22,3 +22,25 @@ export const subCreate = async (name, description) => {
     showAlert('error', err.response.data.message);
   }
 };
+
+export const joinSub = async ({ subid, subName, status }) => {
+  try {
+    console.log(subid, status, subName);
+    const res = await axios({
+      method: 'patch',
+      url: `/api/user/${status}/${subid}`,
+    });
+
+    if (res.data.status == 'success') {
+      showAlert(
+        'success',
+        `${status == 'join' ? 'Joined' : 'Left'} ${subName}`
+      );
+      window.setTimeout(() => {
+        location.reload(true);
+      }, 2000);
+    }
+  } catch (err) {
+    showAlert('error', err.response.data.message);
+  }
+};

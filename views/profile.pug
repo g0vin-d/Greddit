@@ -8,5 +8,7 @@ block content
         p(class="profile__post-count") Posts: 3
     .content
       div(class="content__center")
-        .post
-          include _post
+        if posts
+          each post in posts
+            .post
+              include _post

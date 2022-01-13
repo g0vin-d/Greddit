@@ -1,5 +1,5 @@
 import { login, logout } from './login';
-import { subCreate } from './subreddit';
+import { subCreate, joinSub } from './subreddit';
 import { createPost, setVote } from './post';
 import { createComment, deleteComment } from './comment';
 
@@ -14,6 +14,7 @@ const btnCancelCreatePost = document.querySelector('.btn--cancelCreatePost');
 const btnAddComment = document.querySelector('.btn--postComment');
 const commentSection = document.querySelector('.comments');
 const voteSection = document.querySelector('.post__vote-section');
+const channelBar = document.querySelector('.channel-bar');
 
 // Login
 if (btnLogin) {
@@ -114,6 +115,24 @@ if (main2) {
 
       voteSection.querySelector('.fa-arrow-up').classList.remove('red');
       voteSection.querySelector('.fa-arrow-down').classList.add('red');
+    }
+  });
+}
+
+//Join & Leave sub
+
+if (channelBar) {
+  channelBar.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btn--subJoin')) {
+      const subid = channelBar.firstChild.dataset.channelid;
+      const subName = channelBar.firstChild.textContent;
+
+      joinSub({ subid, status: 'join', subName });
+    } else if (e.target.classList.contains('btn--subLeave')) {
+      const subid = channelBar.firstChild.dataset.channelid;
+      const subName = channelBar.firstChild.textContent;
+
+      joinSub({ subid, status: 'leave', subName });
     }
   });
 }

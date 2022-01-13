@@ -24,6 +24,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: 'defalut.jpg',
   },
+  subs_joined: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Subreddit',
+    },
+  ],
   password: {
     type: String,
     required: [true, 'Please provide a password.'],
@@ -33,7 +39,6 @@ const userSchema = new mongoose.Schema({
   },
   passwordConfirm: {
     type: String,
-    required: [true, 'Please confim your password!!!'],
     validate: {
       validator: function (val) {
         return val === this.password;

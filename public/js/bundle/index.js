@@ -534,6 +534,7 @@ const btnCancelCreatePost = document.querySelector('.btn--cancelCreatePost');
 const btnAddComment = document.querySelector('.btn--postComment');
 const commentSection = document.querySelector('.comments');
 const voteSection = document.querySelector('.post__vote-section');
+const channelBar = document.querySelector('.channel-bar');
 // Login
 if (btnLogin) btnLogin.addEventListener('click', (e)=>{
     const email = document.getElementById('email').value;
@@ -604,6 +605,26 @@ if (main2) main2.addEventListener('click', async (e)=>{
         voteSection2.querySelector('.post__vote-text').textContent = vote;
         voteSection2.querySelector('.fa-arrow-up').classList.remove('red');
         voteSection2.querySelector('.fa-arrow-down').classList.add('red');
+    }
+});
+//Join & Leave sub
+if (channelBar) channelBar.addEventListener('click', (e)=>{
+    if (e.target.classList.contains('btn--subJoin')) {
+        const subid = channelBar.firstChild.dataset.channelid;
+        const subName = channelBar.firstChild.textContent;
+        _subreddit.joinSub({
+            subid,
+            status: 'join',
+            subName
+        });
+    } else if (e.target.classList.contains('btn--subLeave')) {
+        const subid = channelBar.firstChild.dataset.channelid;
+        const subName = channelBar.firstChild.textContent;
+        _subreddit.joinSub({
+            subid,
+            status: 'leave',
+            subName
+        });
     }
 });
 
@@ -2260,6 +2281,8 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "subCreate", ()=>subCreate
 );
+parcelHelpers.export(exports, "joinSub", ()=>joinSub
+);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _alert = require("./alert");
@@ -2278,6 +2301,23 @@ const subCreate = async (name, description)=>{
             _alert.showAlert('success', 'Subreddit created.');
             window.setTimeout(()=>{
                 location.assign('/r/allSubs');
+            }, 2000);
+        }
+    } catch (err) {
+        _alert.showAlert('error', err.response.data.message);
+    }
+};
+const joinSub = async ({ subid , subName , status  })=>{
+    try {
+        console.log(subid, status, subName);
+        const res = await _axiosDefault.default({
+            method: 'patch',
+            url: `/api/user/${status}/${subid}`
+        });
+        if (res.data.status == 'success') {
+            _alert.showAlert('success', `${status == 'join' ? 'Joined' : 'Left'} ${subName}`);
+            window.setTimeout(()=>{
+                location.reload(true);
             }, 2000);
         }
     } catch (err) {
