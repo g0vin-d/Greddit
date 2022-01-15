@@ -4,7 +4,7 @@ div(class="post__header")
   span .
   span Posted by
   div(class="post__author")
-    a(href="#", class="post__author-link")=`u/${post.user.username}`
+    a(href="/profile", class="post__author-link")=`u/${post.user.username}`
   span(class="post__time") 2 days ago
 div(class="post__title")
   a(href=`/post/${post._id}`, class="post__title-link")=post.title
@@ -18,9 +18,9 @@ div(class="post__bar")
       p(class="post__vote-text")=post.votes
       i(class=`fas fa-arrow-down btn--downvote ${post.downvotes.includes(user._id) ? 'red' : ''}`)
     else 
-      i(class=`fas fa-arrow-up btn--upvote`)
+      i(class=`fas fa-arrow-up`)
       p(class="post__vote-text")=post.votes
-      i(class=`fas fa-arrow-down btn--downvote`)
+      i(class=`fas fa-arrow-down`)
 
   div(class="post__comments")
     a(href="#", class="post__comments-link")=`${post.comments ? post.comments.length : 0} `

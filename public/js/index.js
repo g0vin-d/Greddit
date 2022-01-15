@@ -1,10 +1,11 @@
-import { login, logout } from './login';
+import { login, signup, logout } from './login';
 import { subCreate, joinSub } from './subreddit';
 import { createPost, setVote } from './post';
 import { createComment, deleteComment } from './comment';
 
 const main2 = document.querySelector('.main-2');
 const btnLogin = document.querySelector('.btn__login');
+const btnSignup = document.querySelector('.btn__signup');
 const btnLogOut = document.querySelector('.btn--logout');
 const btnShowSubForm = document.querySelector('.btn--showSubForm');
 const btnCreateSub = document.querySelector('.btn--createSub');
@@ -23,6 +24,18 @@ if (btnLogin) {
     const password = document.getElementById('password').value;
 
     login(email, password);
+  });
+}
+
+// Singup
+if (btnSignup) {
+  btnSignup.addEventListener('click', (e) => {
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('password_confirm').value;
+
+    signup({ username, email, password, passwordConfirm });
   });
 }
 

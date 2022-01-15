@@ -74,6 +74,12 @@ exports.createPost = catchAsync(async (req, res, next) => {
 
 exports.login = (req, res, next) => {
   res.status(200).render('login', {
-    title: 'Greddit',
+    title: 'Greddit | Log in',
+  });
+};
+
+exports.signup = (req, res, next) => {
+  res.status(200).render('signup', {
+    title: 'Greddit | Sign up',
   });
 };

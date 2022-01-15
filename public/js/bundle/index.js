@@ -525,6 +525,7 @@ var _post = require("./post");
 var _comment = require("./comment");
 const main2 = document.querySelector('.main-2');
 const btnLogin = document.querySelector('.btn__login');
+const btnSignup = document.querySelector('.btn__signup');
 const btnLogOut = document.querySelector('.btn--logout');
 const btnShowSubForm = document.querySelector('.btn--showSubForm');
 const btnCreateSub = document.querySelector('.btn--createSub');
@@ -540,6 +541,19 @@ if (btnLogin) btnLogin.addEventListener('click', (e)=>{
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     _login.login(email, password);
+});
+// Singup
+if (btnSignup) btnSignup.addEventListener('click', (e)=>{
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('password_confirm').value;
+    _login.signup({
+        username,
+        email,
+        password,
+        passwordConfirm
+    });
 });
 // Logout
 if (btnLogOut) btnLogOut.addEventListener('click', _login.logout);
@@ -633,6 +647,8 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "login", ()=>login
 );
+parcelHelpers.export(exports, "signup", ()=>signup
+);
 parcelHelpers.export(exports, "logout", ()=>logout
 );
 var _axios = require("axios");
@@ -652,6 +668,28 @@ const login = async (email, password)=>{
             _alert.showAlert('success', 'logged in successfully');
             window.setTimeout(()=>{
                 location.assign('/');
+            }, 2000);
+        }
+    } catch (err) {
+        _alert.showAlert('error', err.response.data.message);
+    }
+};
+const signup = async ({ username , email , password , passwordConfirm ,  })=>{
+    try {
+        const res = await _axiosDefault.default({
+            method: 'post',
+            url: '/api/user/signup',
+            data: {
+                username,
+                email,
+                password,
+                passwordConfirm
+            }
+        });
+        if (res.data.status === 'success') {
+            _alert.showAlert('success', 'Account created successfully');
+            window.setTimeout(()=>{
+                location.assign('/login');
             }, 2000);
         }
     } catch (err) {
