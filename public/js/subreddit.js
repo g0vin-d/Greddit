@@ -2,7 +2,7 @@ import axios from 'axios';
 import { showAlert } from './alert';
 
 export const subCreate = async (name, description) => {
-  console.log(name, description);
+  // console.log(name, description);
   try {
     const res = await axios({
       method: 'post',
@@ -25,7 +25,7 @@ export const subCreate = async (name, description) => {
 
 export const joinSub = async ({ subid, subName, status }) => {
   try {
-    console.log(subid, status, subName);
+    // console.log(subid, status, subName);
     const res = await axios({
       method: 'patch',
       url: `/api/user/${status}/${subid}`,

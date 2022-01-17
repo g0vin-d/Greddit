@@ -15,7 +15,7 @@ exports.overview = catchAsync(async (req, res, next) => {
 
 exports.profile = catchAsync(async (req, res, next) => {
   const posts = await Post.find({ user: req.user._id });
-  console.log(posts);
+  // console.log(posts);
   res.status(200).render('profile', {
     title: 'Greddit | profile',
     posts,
@@ -24,7 +24,7 @@ exports.profile = catchAsync(async (req, res, next) => {
 
 exports.postDetail = catchAsync(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
-  console.log(post);
+  // console.log(post);
 
   res.status(200).render('postDetail', {
     title: 'Greddit | Post Detail',
@@ -50,7 +50,7 @@ exports.getSubreddit = catchAsync(async (req, res, next) => {
 
   const posts = await Post.find({ subreddit: subreddit._id });
   const users = await User.find({ subs_joined: subreddit._id });
-  console.log(users);
+  // console.log(users);
 
   res.status(200).render('subreddit', {
     title: `Greddit | ${subreddit.name}`,

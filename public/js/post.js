@@ -4,7 +4,7 @@ import { showAlert } from './alert';
 export const createPost = async (selectOption, title, message) => {
   try {
     subreddit = selectOption.split('-')[1];
-    console.log(subreddit);
+    // console.log(subreddit);
 
     const res = await axios({
       method: 'post',

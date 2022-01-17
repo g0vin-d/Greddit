@@ -2325,7 +2325,7 @@ var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _alert = require("./alert");
 const subCreate = async (name, description)=>{
-    console.log(name, description);
+    // console.log(name, description);
     try {
         const res = await _axiosDefault.default({
             method: 'post',
@@ -2347,7 +2347,7 @@ const subCreate = async (name, description)=>{
 };
 const joinSub = async ({ subid , subName , status  })=>{
     try {
-        console.log(subid, status, subName);
+        // console.log(subid, status, subName);
         const res = await _axiosDefault.default({
             method: 'patch',
             url: `/api/user/${status}/${subid}`
@@ -2376,7 +2376,7 @@ var _alert = require("./alert");
 const createPost = async (selectOption, title, message)=>{
     try {
         subreddit = selectOption.split('-')[1];
-        console.log(subreddit);
+        // console.log(subreddit);
         const res = await _axiosDefault.default({
             method: 'post',
             url: '/api/post',
