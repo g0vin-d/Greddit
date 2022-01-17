@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
 const compression = require('compression');
 const viewRoutes = require('./routes/viewRoutes');
 const postRoutes = require('./routes/postRoutes');
@@ -22,6 +24,12 @@ if (process.env.NODE_ENV == 'development') app.use(morgan('dev'));
 //body parser, cookieparser
 app.use(express.json());
 app.use(cookieParser());
+
+// Data-sanitization: NoSQL injections
+app.use(mongoSanitize());
+
+// Data-sanitization: XSS
+app.use(xss());
 
 //serving static files
 app.use(express.static(path.join(__dirname, '/public')));
