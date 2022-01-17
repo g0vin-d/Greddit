@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 const viewRoutes = require('./routes/viewRoutes');
 const postRoutes = require('./routes/postRoutes');
 const userRoutes = require('./routes/userRoutes');
@@ -24,6 +25,8 @@ app.use(cookieParser());
 
 //serving static files
 app.use(express.static(path.join(__dirname, '/public')));
+
+app.use(compression());
 
 // app.get('/', (req, res, next) => {
 //   res.status(200).json(DB);
