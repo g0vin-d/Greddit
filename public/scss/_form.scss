@@ -1,12 +1,7 @@
-.ma-bt-md {
-  margin-bottom: 3rem !important;
-}
-
-.ma-bt-lg {
-  margin-bottom: 3.5rem !important;
-}
-
 .login-form {
+  @media only screen and (max-width: 550px) {
+    padding: 4rem 3rem;
+  }
   max-width: 55rem;
   background-color: white;
   margin: 0 auto;
@@ -17,6 +12,9 @@
 
 .createSub-form,
 .createPost-form {
+  @media only screen and (max-width: 550px) {
+    padding: 4rem 3rem;
+  }
   max-width: 75rem;
   background-color: white;
   margin: 0 auto;
@@ -26,6 +24,9 @@
 }
 
 .subreddit-btn {
+  @media only screen and (max-width: 550px) {
+    padding: 4rem 3rem;
+  }
   max-width: 75rem;
   background-color: white;
   margin: 0 auto;
@@ -38,7 +39,18 @@
 .form {
   display: block;
 
+  &__group {
+    @media only screen and (max-width: 400px) {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
   &__group:not(:last-child) {
+    @media only screen and (max-width: 500px) {
+      margin-bottom: 1rem;
+    }
     margin-bottom: 2.5rem;
   }
   &__label {
@@ -83,6 +95,9 @@
   }
 
   &__input {
+    @media only screen and (max-width: 550px) {
+      width: 95%;
+    }
     font-family: inherit;
     font-size: 1.5rem;
     color: inherit;

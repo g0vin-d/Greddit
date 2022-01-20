@@ -1,4 +1,8 @@
 .alert {
+  @media only screen and (max-width: 550px) {
+    padding: 1.6rem 2rem;
+    font-size: 1.5rem;
+  }
   position: fixed;
   top: 0;
   left: 50%;
@@ -20,6 +24,17 @@
 }
 .alert--error {
   background-color: #eb4d4b;
+}
+
+.ma-bt-sm {
+  margin-bottom: 1rem !important;
+}
+.ma-bt-md {
+  margin-bottom: 3rem !important;
+}
+
+.ma-bt-lg {
+  margin-bottom: 3.5rem !important;
 }
 
 .hidden {

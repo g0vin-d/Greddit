@@ -7,16 +7,26 @@
   border-bottom: var(--line);
 
   &__logo-box {
+    @media only screen and (max-width: 500px) {
+      margin-left: 2rem;
+    }
     align-self: center;
     margin-left: 3rem;
     display: flex;
   }
 
   &__logo {
+    @media only screen and (max-width: 500px) {
+      height: 3rem;
+    }
     height: 4rem;
   }
 
   &__logo-text {
+    @media only screen and (max-width: 500px) {
+      margin-left: 0.5rem;
+      font-size: 1.4rem;
+    }
     text-decoration: none;
     font-size: 1.7rem;
     font-weight: 400;
@@ -34,17 +44,27 @@
   }
 
   &__item {
+    @media only screen and (max-width: 500px) {
+      margin: 0.5rem;
+    }
     margin: 1rem;
     align-self: center;
     justify-self: center;
 
     i {
+      @media only screen and (max-width: 500px) {
+        font-size: 1.5rem;
+        padding-right: 0.5rem;
+      }
       font-size: 2.2rem;
       padding-right: 0.7rem;
       color: white;
     }
 
     &:last-child {
+      @media only screen and (max-width: 500px) {
+        margin-right: 2rem;
+      }
       margin-right: 4rem;
     }
   }
@@ -52,6 +72,9 @@
   &__link {
     &:link,
     &:visited {
+      @media only screen and (max-width: 500px) {
+        font-size: 1.4rem;
+      }
       font-size: 1.7rem;
       font-weight: 400;
       text-decoration: none;
